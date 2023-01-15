@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-
+import Starter from './Starter.jsx';
+import SideBar  from './SideBar';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div style={{
+      background:" yellow",
+      fontFamily:"Source Sans Pro"
+      }}>
+      <div style={{
+        width:"20%",
+        display:"inline-block"}}>
+        <SideBar/>
+      </div>
+      <div style={{
+        width:"80%",
+        background:"#141A28",
+        display:"inline-block"}}>
+          coding
+      </div>
     </div>
+    
+    </>
   );
 }
-
 export default App;
