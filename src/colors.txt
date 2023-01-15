@@ -1,0 +1,5 @@
+white : #DDE1E9
+sidebar bg : #1B2537
+main screen bg : #141A28
+green : #43C6A2 
+btn clicked purple : #5A5FDA

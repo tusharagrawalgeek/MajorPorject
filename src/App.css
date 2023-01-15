@@ -55,10 +55,45 @@ h5{
 }
 .nametd{
   /* color:""; */
-  color:#47d147;
-  display: flex;
+  color:#43C6A2;
+  /* display: flex;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: center; */
 
   /* flexWrap:"wrap",alignContent:"center"}} */
+}
+.btn-sidebar{
+  background-color: transparent;
+  border: 0 ;
+  font-size: .83em;
+  color: #DDE1E9;
+}
+.btn-sidebar-clicked{
+  background-color: transparent;
+  border: 0 ;
+  font-size: .83em;
+  font-weight:600;
+  color: #5A5FDA;
+  /* color: #0b0e16; */
+}
+.att-td-off{
+  padding: 0.5em;
+  /* border: #DDE1E9; */
+  background-color: #26735C;
+  border: 2px solid #1B2537;
+  text-align: center;
+}
+.att-td-on{
+  padding: 0.5em;
+  /* border: #DDE1E9; */
+  background-color: #43C6A2;
+  border: 2px solid #1B2537;
+  text-align: center;
+}
+.att-td-na{
+  padding: 0.5em;
+  /* border: #DDE1E9; */
+  /* background-color: #D98CA3; */
+  border: 2px solid #1B2537;
+  text-align: center;
 }

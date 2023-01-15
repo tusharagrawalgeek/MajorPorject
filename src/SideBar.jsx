@@ -1,7 +1,22 @@
+// import { click } from "@testing-library/user-event/dist/click";
 import React from "react";
 import { ReactDOM } from "react";
 import './App.css';
-function SideBar(){
+import App from "./App";
+// var clicked=true;
+var click=false;
+class SideBar extends React.Component {
+    fxn(){
+        this.click=!this.click;
+        console.log(click);
+    }
+    render() {
+    
+    // function clickedbtn(){
+    //     clicked=true;
+    //     return;
+    // }
+   
     return (
         <>      
         <div style={{
@@ -23,31 +38,33 @@ function SideBar(){
                     <td><br/></td>
                 </tr>
                 <tr>
-                    <td><h5>Class Attendance</h5></td>
+                    <td><h5><button className="btn-sidebar">Profile</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>My Feedback</h5></td>
+                     <td><h5><button className={click?"btn-sidebar-clicked":"btn-sidebar"} onClick={this.fxn}>Subjects</button></h5></td>
+                </tr>
+                {/* {console.log(click)} */}
+                <tr>
+                    <td><h5><button className="btn-sidebar-clicked">Class Attendance</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>Profile</h5></td>
+                    <td><h5><button className="btn-sidebar">My Feedback</button></h5></td>
+                </tr>
+                
+                <tr>
+                    <td><h5><button className="btn-sidebar">Notices</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>Subjects</h5></td>
+                    <td><h5><button className="btn-sidebar">Registration Form</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>Notices</h5></td>
+                    <td><h5><button className="btn-sidebar">Marks</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>Registration Form</h5></td>
+                     <td><h5><button className="btn-sidebar">Upload Documents</button></h5></td>
                 </tr>
                 <tr>
-                    <td><h5>Marks</h5></td>
-                </tr>
-                <tr>
-                    <td><h5>Upload Documents</h5></td>
-                </tr>
-                <tr>
-                    <td><h5>Logout</h5></td>
+                    <td><h5><button className="btn-sidebar">Logout</button></h5></td>
                 </tr>
             </table>
             </div>
@@ -56,4 +73,12 @@ function SideBar(){
         </>
     );
 }
-export default SideBar;
+}
+// function handleBtnClick(){
+//     console.log("Clicked")
+//     clicked=true;
+//     return;
+// }
+
+
+  export default SideBar;
