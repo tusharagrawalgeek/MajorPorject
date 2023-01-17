@@ -5,12 +5,12 @@ import './App.css';
 import App from "./App";
 // var clicked=true;
 var click=false;
-class SideBar extends React.Component {
-    fxn(){
-        this.click=!this.click;
-        console.log(click);
-    }
-    render() {
+function SideBar(){
+    // fxn(){
+    //     this.click=!this.click;
+    //     console.log(click);
+    // }
+    // render() {
     
     // function clickedbtn(){
     //     clicked=true;
@@ -41,7 +41,7 @@ class SideBar extends React.Component {
                     <td><h5><button className="btn-sidebar">Profile</button></h5></td>
                 </tr>
                 <tr>
-                     <td><h5><button className={click?"btn-sidebar-clicked":"btn-sidebar"} onClick={this.fxn}>Subjects</button></h5></td>
+                     <td><h5><button className={true?"btn-sidebar-clicked":"btn-sidebar"} onClick={null}>Subjects</button></h5></td>
                 </tr>
                 {/* {console.log(click)} */}
                 <tr>
@@ -72,7 +72,7 @@ class SideBar extends React.Component {
         </div>
         </>
     );
-}
+
 }
 // function handleBtnClick(){
 //     console.log("Clicked")
