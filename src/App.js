@@ -9,16 +9,19 @@ function App(){
   return (
     <>
     <div>
-      <table style={{borderSpacing:0, borderPadding:0}}>
+      <table style={{borderSpacing:0, borderPadding:0, width:"100%"}}>
         <tr>
-          <td style={{padding:"0", verticalAlign:"top"}}>
+          {/* <td style={{padding:"0",height:"100%", verticalAlign:"top"}}>
           <div style={{
             width:"220px"
           }}>
           <SideBar/>
           </div>
+          </td> */}
+          <td style={{padding:"0",background:"#1B2537", verticalAlign:"top",width:"30vh "}} >
+          <SideBar/>
           </td>
-          <td style={{padding:"0", width:"100%",height:"120%", background:"#141A28", verticalAlign:"top"}}>
+          <td style={{padding:"0", background:"#141A28",height:"100vh", verticalAlign:"top"}}>
           <Content/>
           </td>
         </tr>
