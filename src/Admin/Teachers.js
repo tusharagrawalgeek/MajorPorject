@@ -3,7 +3,8 @@ import TeachersTable from "../TeachersTable";
 import FileBase64 from "react-file-base64";
 import uploadTeacher from "../api/uploadTeacher";
 import SectionAllotment from "../Components/sectionAllotment";
-import Modal from '@material-ui/core/Modal';
+import Modal from '@mui/material/Modal';
+
 import * as colors from '../colors';
 function Teachers(props) {
   const [state, setState] = useState({
