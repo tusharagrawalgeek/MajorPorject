@@ -3,71 +3,64 @@ import SideBar  from './SideBar';
 import Content from './Content';
 import Starter from './Starter';
 import Profile from './Profile';
-import { Route,Routes } from 'react-router-dom';
+import { Outlet, Route,Routes } from 'react-router-dom';
 import { useState } from 'react';
 import Attendance from './Attendance';
-import students from './data';
+// import students from './data';
 import axios from 'axios';
-function HomePage(){
+function HomePage(props){
     var page="Content";
     const [state,setState]=useState({
       selectedState:"profile",
-      user:null
+      user:props.user
     });
     function changeState(p){
-      // console.log("Here")
-      setState({selectedState:p});
+      console.log("Here")
+      setState(prev=>{
+        return {
+          ...prev,
+          selectedState:p
+        }
+      });
     }
-    // console.log(props)
-    if(state.user===null){
-    axios.get('http://localhost:3001/user')
-        .then(response=>{
-            // console.log(response.data)
-            console.log("here");
-            console.log(response.data);
-            if(state.user===null)
-            setState(prev=>{
-              return({
-                ...prev,
-                user:response.data
-              })
-            })    
 
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-        return;
-    }
+    // if(state.user===null){
+    // axios.get('http://localhost:3001/user')
+    //     .then(response=>{
+    //         // console.log(response.data)
+    //         console.log("here");
+    //         console.log(response.data);
+    //         if(state.user===null)
+    //         setState (prev=>{
+    //           return({
+    //             ...prev,
+    //             user:response.data
+    //           })
+    //         })    
+
+    //     })
+    //     .catch(err=>{
+    //         console.log(err);
+    //     })
+    //     return;
+    // }
     return (
         <>
+        {console.log(state.user)}
         <div>
           <table style={{borderSpacing:0, borderPadding:0, width:"100%"}}>
             <tr>
              
               <td style={{padding:"0",background:"#1B2537", verticalAlign:"top",width:"30vh "}} >
               <SideBar user={state.user} selectedState={state.selectedState} changeState={changeState}/>
+              
               </td>
-              <td style={{padding:"0", background:"#141A28",height:"100vh", verticalAlign:"top"}}>
-              {state.selectedState==="attendance"&&<Content/>}
-              {state.selectedState==="profile"&&<Profile user={state.user}/>}
-              {/* <Routes> */}
-                {/* <Route path='//Attendance' element={<Attendance/>}/> */}
-                {/* <Route path='/Starter' element={<Starter/>}/> */}
-                {/* <Route path='/Profile' element={<Profile/>}/> */}
-              {/* </Routes> */}
-              {/* <Content/> */}
+              <td style={{padding:"", background:"#141A28",height:"100vh", verticalAlign:"top"}}>
+              <Outlet/>
               </td>
             </tr>
           </table>
         </div>
-        {/* <div style={{
-          background:" yellow",
-          fontFamily:"Source Sans Pro"
-          }}>
-          
-    
-        </div> */}
         
         </>
       );

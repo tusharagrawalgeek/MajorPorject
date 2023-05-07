@@ -3,13 +3,29 @@ import Starter from './Starter.jsx';
 import React, { useState } from 'react';
 import Login from './Login';
 import HomePage from './HomePage';
+import Profile from './Profile';
 import HomePage2 from './HomePage2';
-import { Routes,Route,BrowserRouter } from 'react-router-dom';
 import Attendance from './Attendance';
 import axios from 'axios';
 import Modal from './Modal';
-// import {Routes,Route} from ''
-// const click=false;
+import SubjectsAndFeedback from './SubjectsAndFeedback';
+import findUser from './Login Functions/findUser';
+import Students from './Students';
+import Notices from './Notices';
+import Marks from './Marks';
+import Documents from './Documents';
+import HostelDocuments from './HostelDocuments.js';
+import FeeDocuments from './FeeDocuments.js';
+import Marks2 from './Marks2';
+import HomePage3 from './Admin/HomePage3';
+import Teachers from './Admin/Teachers';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
+import RegistrationDocuments from './RegistrationDocuments';
 function App(){
     const [state, setState]=useState({
       user:null,
@@ -18,6 +34,8 @@ function App(){
         message:"",
         messageType:""
     });
+    const navigate = useNavigate();
+
     function display(){
       if(state.message){
       setTimeout(
@@ -33,110 +51,61 @@ function App(){
       return <Modal show={state.showMessage} type={state.messageType} message={state.message}/>
       }
   }
-    function setUser(u){
-      var user;
-        axios.get('http://localhost:3001/')
-        .then(response=>{
-            // console.log(response.data)
-           var found= response.data.some(i=>{
-                if(i.username===u.id){
-                    console.log("Id matched");
-                    if(i.pass===u.pass){
-                        // user=i;
-                        console.log("pswd matched");
-                        console.log(i);
-                        setState(prev=>{
-                            return({
-                                ...prev,
-                                // userMatched:true,
-                                user:i
-                            });
-                        })
-                        return true;
-                    }else{
-                        console.log("But pswd doesn't match");
-                        return false;
-                    }    
-                }
-            })
-            if(!found){
-              console.log("User does not exist");
-            }
-            return found;
-            
-        })
-        .catch(err=>{
-            console.log(err);
-            setState(prev=>{
-              console.log(err.message)
-              return({
-                  ...prev,
-                  message:err.message+" occurred",
-                  showMessage:true,
-                  messageType:"error"
-              });
-          });
-        })
-        
-      // console.log(u);
-      // setState({user:u});
-      // console.log(state.user);
-      // window.location='/HomePage';
+  async function setUser(u){
+    const user=await findUser(u.id,u.pass);
+    if(user){
+      console.log(user);
+      setState({...state,user:user})
+      navigate("home/profile", {state: {}});
+      // return <Redirect to="home/profile"></Redirect>
+    }else{
+      console.log("Not found");
+      alert("User not found");
     }
-    
-    
-    if(state.user!==null&&!state.apiSent){
-      const url="http://localhost:3001/user"
-        console.log("sending data");
-          console.log(state.user);
-            axios.post(url,state.user)
-            .then(response=>{
-              // console.log(response);
-              if(response.data==='OK')
-                setState(prev=>{
-                  return({
-                    ...prev,
-                    apiSent:true
-                  });
-                })
-                console.log(response)
-            })
-            .catch(err=>{
-                console.log(err)
-                setState(prev=>{
-                  console.log(err.message)
-                  return({
-                      ...prev,
-                      message:err.message+" occurred",
-                      showMessage:true,
-                      messageType:"error"
-                  });
-              });
-            })
-      // console.log(state.user);
-      
-      
-    }
-    const chunk={
-      name:"Sonali"
-
-    }
-    if(state.apiSent===true){
-      if(state.user.username==="teacher"){
-        window.location='/HomePage2'
-      }else
-      window.location='/HomePage'
-    }
+  }
     return(
       <>
-      {display()}
-      {/* {console.log(state.user)} */}
-      <Routes>
-        <Route path='/HomePage' element={<HomePage/>}/>
-        <Route path='Starter' element={<Starter/>}/>
-        <Route path='HomePage2' element={<HomePage2/>}/>
-        <Route path='/' element={<Login setUser={setUser} user={state.user}/>}/>
+      {console.log(state.user)}
+      {/* <Router> */}
+        <Routes>
+        <Route path="/" element={<Login setUser={setUser} user={state.user}/>} />
+        {state.user!=null&&state.user.profile==="student"?
+        <>
+        <Route path="/home" element={<HomePage user={state.user}/>}>
+          <Route path="profile" element={<Profile user={state.user}/>}/>
+          <Route path="attendance" element={<Attendance user={state.user}/>}/>
+          <Route path="subjectsandfeedback" element={<SubjectsAndFeedback user={state.user}/>}/>
+          <Route path="notices" element={<Notices/>}/>
+          <Route path="marks" element={<Marks user={state.user}/>}/>
+          <Route path="documents" element={<Documents/>}>
+          <Route path="registrationDocuments" element={<RegistrationDocuments/>}/>
+          <Route path="feeDocuments" element={<FeeDocuments/>}/>
+          <Route path="hostelDocuments" element={<HostelDocuments/>}/>
+          </Route>
+          </Route>
+          </>
+          :state.user!=null&&state.user.profile==="teacher"?
+          <>
+          <Route path="/home" element={<HomePage2 user={state.user}/>}>
+          <Route path="profile" element={<Profile user={state.user}/>}/>
+          <Route path="students" element={<Students user={state.user}/>}/>
+          <Route path="marks" element={<Marks2 user={state.user}/>}/>
+          </Route>
+          </>
+          :
+          <>
+          <Route path="/home" element={<HomePage3 user={state.user}/>}>
+          <Route path="profile" element={<Profile user={state.user}/>}/>
+          <Route path="teachers" element={<Teachers user={state.user}/>}/>
+          {/* <Route path="import" element={<Import/>}/> */}
+          {/* <Route path="delete" element={<DeleteOptions/>}/> */}
+          {/* <Route path="export" element={<Export/>}/> */}
+          </Route>
+          </>
+        }
+        
       </Routes>
+      {/* </Router> */}
       </>
     );
 }

@@ -22,7 +22,6 @@ function Row(){
     );
 }
 function Content() {
-    // render() {
         return(
             <>
             <div style={{margin:"25px",color:"#DDE1E9"}}>
@@ -36,34 +35,9 @@ function Content() {
                     <thead></thead>
                     <tbody>
                         {r.map(Row)}
-                    
                     </tbody>
                 </table>
                 </div>
-                {/* <div style={{margin:"2em",verticalAlign:"top", height:"73vh", width:"8%",marginTop:"0", background:"#1B2537",display:"inline-block"}}>
-                    <table style={{borderCollapse:"collapse"}}>
-                        <tr>
-                            <td width="62vh" className="att-td-on" style={{textAlign:"center", verticalAlign:"bottom"}}>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <b>64%</b>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                                    <br></br>
-                            </td>
-                        </tr>
-                    </table>
-                </div> */}
                 </div>
             </div>
             </>

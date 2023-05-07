@@ -14,6 +14,12 @@ function Login(props){
         userMatched:false,
         user:null
     });
+    function delayDirect(event){
+        const { history: { push } } = this.props;
+        event.preventDefault();
+        setTimeout(()=>{}, 1000);
+      }
+    
     function handleChange(e){
         const obj=e.target;
         // console.log(obj.value+" "+obj.name);
@@ -79,7 +85,8 @@ function Login(props){
                         type="text"
                         onChange={handleChange}
                         style={{margin:"10px 10px 20px 10px"}}
-                        placeholder="User ID">
+                        placeholder="User ID"
+                        autocomplete="off">
                     </input>
                     <br></br>
                     <input 
@@ -89,10 +96,13 @@ function Login(props){
                         type="password"
                         onChange={handleChange}
                         style={{margin:"10px 10px 20px 10px"}}
-                        placeholder="Password">
+                        placeholder="Password"
+                        autocomplete="off">
                     </input>
                     <br></br>
-                    <button onClick={()=>{
+                    {/* <Link to="home/profile"> */}
+                    <button 
+                    onClick={()=>{
                         props.setUser({id:state.id,pass:state.pass})
                         }}
                         className={state.btnClass}
@@ -103,6 +113,7 @@ function Login(props){
                         Login
                         </b>
                     </button>
+                    {/* </Link> */}
                 </form>
                 </div>
             </div>
